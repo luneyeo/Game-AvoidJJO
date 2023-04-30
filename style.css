@@ -1,0 +1,34 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap');
+
+
+body {
+  width: 400px;
+  max-height: 100vh;
+  margin: 0 auto;
+  background-color: aliceblue;
+}
+button {
+  font-family: 'Noto Sans KR', 'Malgun Gothic', '맑은고딕', sans-serif;
+  font-weight: 400;
+  font-size: 20px;
+}
+
+.reloadBtn {
+  width: 160px;
+  height: 54px;
+  padding: 0;
+  margin: 28px auto;
+  background-color: #fff;
+  border: 2px solid red;
+  border-radius: 110px;
+  display: block;
+
+  color: red;
+  transition: .1s linear;
+}
+.reloadBtn:hover {
+  background-color: red;
+  border: 3px solid red;
+  color: #fff;
+  cursor: pointer;
+}

@@ -79,11 +79,10 @@ function Enemy() {
   this.x = 0;
   this.y = 0;
   this.init = function() {
-    this.y = 0
+    this.y = -60
     this.x = generateRandomValue(0 , canvas.width - 64)
     enemyList.push(this)
     avoidEnemy()
-    meetEnemy()
   }
   this.update = function() {
     this.y += 3 // 적군 떨어지는 속도 조절
@@ -99,14 +98,14 @@ function createEnemy() {
     if(gameOver){ // 게임오버일때 적군 생성 멈추기
       clearInterval(interval)
     }
-  } , 800)
+  } , 600)
 }
 
 
 // 적군을 피하면 스코어 1점 얻기
 function avoidEnemy(){
   for(let i = 0; i < enemyList.length; i++) {
-    if(enemyList[i].y > canvas.height - 100 ){
+    if(enemyList[i].y > canvas.height - 50 ){
       score++
       enemyList.splice(i, 1) // 마지막 배열 값 삭제
       i--;
@@ -114,18 +113,20 @@ function avoidEnemy(){
   }
 }
 
+
 // 적군을 만나면 게임오버
 function meetEnemy() {
   for(let i = 0; i < enemyList.length; i++){
-    if(enemyList[i].y >= chimY - 68
-      && enemyList[i].x <= chimX
-      && enemyList[i].x + 64 >= chimX
+    if(
+      enemyList[i].y > chimY - 60 // 적군 y값이 chimY - 60 보다 크거나 같은 경우
+      && enemyList[i].y <= chimY // 적군 y값이 chimY보다 작거나 같은 경우
+      && enemyList[i].x + 50 >= chimX // 적군 x값 + 50이 chimX보다 크거나 같은 경우
+      && enemyList[i].x <= chimX + 50 // 적군 x값이 chimX + 50 보다 작거나 같은 경우
       ){
       gameOver = true;
-      console.log('gameover')
+      // console.log('gameover')
     }
-    console.log('chimY', chimY)
-    console.log('enemyList[i].y', enemyList[i].y)
+    // console.log(chimX)
   }
 }
 
@@ -133,23 +134,41 @@ function meetEnemy() {
 function render() {
   ctx.drawImage(backgroundImage, 0, 0, canvas.width, canvas.height);
   ctx.drawImage(chimImage, chimX, chimY);
-  ctx.fillText(`Score: ${score}`, 20, 30);
+  ctx.fillText(`Score: ${score}`, 20, 40);
   ctx.fillStyle = 'white';
-  ctx.font = '20px Arial';
+  ctx.font = '22px Noto Sans KR';
 
   for(let i = 0; i < enemyList.length; i++) {
     ctx.drawImage(enemyImage, enemyList[i].x, enemyList[i].y)
   }
 }
 
+//// 게임오버!
+function gameover() {
+  ctx.font = '30px Noto Sans KR'
+  ctx.textAlign = 'center'
+  ctx.fillText(`${score}점`, canvas.width / 2, 390);
+}
+
+//// 다시 하기! / 윈도우 새로고침
+window.addEventListener("load", e => {
+  document.getElementById("reload").onclick = function() {
+    location.reload(true);
+    // gameOver = false;
+  }
+});
+
+
 //// gif를 계속해서 호출하기!
 function main() {
   if(!gameOver){
+    meetEnemy() 
     update() // 좌표값 업데이트
     render() // 배경 이미지
     requestAnimationFrame(main)
   } else{
     ctx.drawImage(gameOverImage, 0, 0)
+    gameover()
   }
 }
 
