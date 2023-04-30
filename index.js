@@ -85,7 +85,7 @@ function Enemy() {
     avoidEnemy()
   }
   this.update = function() {
-    this.y += 3 // 적군 떨어지는 속도 조절
+    this.y += 6 // 적군 떨어지는 속도 조절
   }
 
 }
@@ -98,7 +98,7 @@ function createEnemy() {
     if(gameOver){ // 게임오버일때 적군 생성 멈추기
       clearInterval(interval)
     }
-  } , 600)
+  } , 200)
 }
 
 
