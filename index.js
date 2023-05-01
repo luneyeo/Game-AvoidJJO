@@ -98,7 +98,7 @@ function createEnemy() {
     if(gameOver){ // 게임오버일때 적군 생성 멈추기
       clearInterval(interval)
     }
-  } , 200)
+  } ,400)
 }
 
 
