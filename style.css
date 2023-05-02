@@ -32,3 +32,17 @@ button {
   color: #fff;
   cursor: pointer;
 }
+
+.startBtn {
+  width: 160px;
+  height: 54px;
+  padding: 0;
+  margin: 28px auto;
+  background-color: #fff;
+  border: 2px solid blue;
+  border-radius: 110px;
+  display: block;
+
+  color: blue;
+  transition: .1s linear;
+}

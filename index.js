@@ -98,7 +98,7 @@ function createEnemy() {
     if(gameOver){ // 게임오버일때 적군 생성 멈추기
       clearInterval(interval)
     }
-  } ,400)
+  } , 500)
 }
 
 
@@ -158,6 +158,9 @@ window.addEventListener("load", e => {
   }
 });
 
+
+const startBtn = document.querySelector('.startBtn')
+// startBtn.addEventListener('click', main)
 
 //// gif를 계속해서 호출하기!
 function main() {
